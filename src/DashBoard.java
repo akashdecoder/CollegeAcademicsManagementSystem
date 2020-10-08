@@ -43,12 +43,12 @@ public class DashBoard extends JFrame {
 	public DashBoard() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\akashdecoder.github.io-master\\SIT-Tumkur-Logo.png"));
 		setTitle("College Academics Management System");
-		setBackground(new Color(147, 112, 219));
+		setBackground(new Color(153, 51, 204));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 1080, 700);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(147, 112, 219));
+		contentPane.setBackground(new Color(153, 51, 204));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -118,6 +118,7 @@ public class DashBoard extends JFrame {
 		panel.setLayout(gl_panel);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBackground(new Color(153, 255, 51));
 		tabbedPane.setBounds(295, 91, 785, 609);
 		contentPane.add(tabbedPane);
 		

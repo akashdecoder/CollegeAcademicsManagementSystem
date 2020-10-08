@@ -63,28 +63,21 @@ public class FacultyDashBoard extends JFrame {
 		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnNewButton.setBackground(new Color(0, 139, 139));
-		btnNewButton.setBounds(0, 261, 324, 48);
+		btnNewButton.setBounds(0, 273, 324, 48);
 		panel.add(btnNewButton);
 		
 		JButton btnUploadMarks = new JButton("Upload Marks & Attendance");
 		btnUploadMarks.setForeground(new Color(0, 0, 0));
 		btnUploadMarks.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnUploadMarks.setBackground(new Color(0, 139, 139));
-		btnUploadMarks.setBounds(0, 344, 324, 48);
+		btnUploadMarks.setBounds(0, 354, 324, 48);
 		panel.add(btnUploadMarks);
-		
-		JButton btnUploadAttendance = new JButton("Upload Attendance");
-		btnUploadAttendance.setForeground(new Color(0, 0, 0));
-		btnUploadAttendance.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnUploadAttendance.setBackground(new Color(0, 139, 139));
-		btnUploadAttendance.setBounds(0, 424, 324, 48);
-		panel.add(btnUploadAttendance);
 		
 		JButton btnOthers = new JButton("Others");
 		btnOthers.setForeground(new Color(0, 0, 0));
 		btnOthers.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnOthers.setBackground(new Color(0, 139, 139));
-		btnOthers.setBounds(0, 504, 324, 48);
+		btnOthers.setBounds(0, 436, 324, 48);
 		panel.add(btnOthers);
 		
 		JButton btnExit = new JButton("Exit");
@@ -102,10 +95,11 @@ public class FacultyDashBoard extends JFrame {
 		});
 		btnExit.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnExit.setBackground(new Color(0, 139, 139));
-		btnExit.setBounds(0, 582, 324, 48);
+		btnExit.setBounds(0, 514, 324, 48);
 		panel.add(btnExit);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBackground(new Color(153, 255, 51));
 		tabbedPane.setBounds(324, 25, 962, 638);
 		contentPane.add(tabbedPane);
 		
@@ -309,7 +303,9 @@ public class FacultyDashBoard extends JFrame {
 		Upload_window.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
+					dispose();
+					UploadMA frame = new UploadMA();
+					frame.setVisible(true);
 				} catch(Exception exp) {
 					exp.printStackTrace();
 				}
@@ -320,11 +316,15 @@ public class FacultyDashBoard extends JFrame {
 		Upload_window.setBounds(339, 423, 281, 49);
 		panel_2.add(Upload_window);
 		
+		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Subject");
+		lblNewLabel_1_1_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_1_1_1_1_1.setBounds(14, 303, 142, 38);
+		panel_2.add(lblNewLabel_1_1_1_1_1);
 		
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(255, 255, 255));
-		tabbedPane.addTab("Upload Attendance", null, panel_3, null);
+		JComboBox<String> section_1 = new JComboBox<String>();
+		section_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		section_1.setBounds(172, 303, 448, 38);
+		panel_2.add(section_1);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(255, 255, 255));
@@ -387,20 +387,10 @@ public class FacultyDashBoard extends JFrame {
 			}
 		});
 		
-		btnUploadAttendance.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					tabbedPane.setSelectedIndex(2);
-				} catch(Exception exp) {
-					exp.printStackTrace();
-				}
-			}
-		});
-		
 		btnOthers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					tabbedPane.setSelectedIndex(3);
+					tabbedPane.setSelectedIndex(2);
 				} catch(Exception exp) {
 					exp.printStackTrace();
 				}

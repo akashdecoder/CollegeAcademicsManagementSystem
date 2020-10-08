@@ -162,6 +162,7 @@ public class StudentDashBoard extends JFrame {
 		panel.add(btnEit);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBackground(new Color(153, 255, 51));
 		tabbedPane.setBounds(296, 25, 990, 638);
 		contentPane.add(tabbedPane);
 		

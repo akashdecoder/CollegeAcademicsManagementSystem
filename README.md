@@ -14,4 +14,5 @@
 
 ## How to remotely access your mysql database from another computer.
 mysql> CREATE USER 'root'@'%' IDENTIFIED BY 'root';
+
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;

@@ -22,6 +22,7 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
@@ -390,11 +391,44 @@ public class FacultyDashBoard extends JFrame {
 		tabbedPane.addTab("Others", null, panel_4, null);
 		panel_4.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("Upload Notes");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnNewButton_1.setBackground(new Color(153, 255, 153));
-		btnNewButton_1.setBounds(39, 38, 404, 142);
-		panel_4.add(btnNewButton_1);
+		JButton upload_notes = new JButton("Upload Notes");
+		upload_notes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					DatabaseOperation dbo = new DatabaseOperation();
+					Database db = new Database();
+					Connection conn = dbo.getConnection(db.url, db.userName, db.userPassword);
+					Statement st = conn.createStatement();
+					ResultSet res = st.executeQuery("select * from faculty_database;");
+					
+					JFileChooser jFile = new JFileChooser();
+					jFile.setDialogTitle("Choose file");
+					int result = jFile.showSaveDialog(null);
+					if(result == JFileChooser.APPROVE_OPTION) {
+						File file = jFile.getSelectedFile();
+						FileReader reader = new FileReader(file.getAbsolutePath());
+						while(res.next()) {
+							if(FacultyLoginWindow.facultyname.equals(res.getString
+									("faculty_name"))) {
+								java.util.Date date = new java.util.Date();
+								java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+								java.sql.Timestamp sqlTime = new java.sql.Timestamp(date.getTime());
+								int status = dbo.uploadNotes(conn, 
+										res.getString("faculty_name"), reader, sqlDate, sqlTime);
+							}
+						}
+						JOptionPane.showMessageDialog(null,"File Uploaded");
+					}
+				} catch(Exception exp) {
+					JOptionPane.showMessageDialog(null, exp.getMessage());
+					exp.printStackTrace();
+				}
+			}
+		});
+		upload_notes.setFont(new Font("Tahoma", Font.BOLD, 18));
+		upload_notes.setBackground(new Color(153, 255, 153));
+		upload_notes.setBounds(39, 38, 404, 142);
+		panel_4.add(upload_notes);
 		
 		JButton btnNewButton_1_1 = new JButton("Upload Paper");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
@@ -415,8 +449,11 @@ public class FacultyDashBoard extends JFrame {
 						while(res.next()) {
 							if(FacultyLoginWindow.facultyname.equals(res.getString
 									("faculty_name"))) {
+								java.util.Date date = new java.util.Date();
+								java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+								java.sql.Timestamp sqlTime = new java.sql.Timestamp(date.getTime());
 								int status = dbo.uploadPaper(conn, 
-										res.getString("faculty_name"), reader);
+										res.getString("faculty_name"), reader, sqlDate, sqlTime);
 							}
 						}
 						JOptionPane.showMessageDialog(null,"File Uploaded");

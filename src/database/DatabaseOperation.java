@@ -90,14 +90,33 @@ public class DatabaseOperation {
 		return status;
 	}
 	
-	public int uploadPaper(Connection conn, String name, FileReader file) {
+	public int uploadPaper(Connection conn, String name, FileReader file, java.sql.Date date, Timestamp time) {
 		int status = 0;
 		PreparedStatement pst;
 		try {
 			pst = conn.prepareStatement("insert into faculty_upload_papers (name, "
-					+ "file) values(?, ?)");
+					+ "file, date, time) values(?, ?, ?, ?)");
 			pst.setString(1, name);
 			pst.setCharacterStream(2, file);
+			pst.setDate(3, date);
+			pst.setTimestamp(4, time);
+			status = pst.executeUpdate();
+		} catch (Exception exp) {
+			exp.printStackTrace();
+		}
+		return status;
+	}
+	
+	public int uploadNotes(Connection conn, String name, FileReader file, java.sql.Date date, Timestamp time) {
+		int status = 0;
+		PreparedStatement pst;
+		try {
+			pst = conn.prepareStatement("insert into faculty_upload_notes (name, "
+					+ "note_file, date, time) values(?, ?, ?, ?)");
+			pst.setString(1, name);
+			pst.setCharacterStream(2, file);
+			pst.setDate(3, date);
+			pst.setTimestamp(4, time);
 			status = pst.executeUpdate();
 		} catch (Exception exp) {
 			exp.printStackTrace();

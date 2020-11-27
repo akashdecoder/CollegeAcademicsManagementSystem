@@ -4,7 +4,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DashBoard frame = new DashBoard();
+					ConnectDatabase frame = new ConnectDatabase();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

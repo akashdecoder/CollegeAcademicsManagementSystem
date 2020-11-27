@@ -778,6 +778,10 @@ public class StudentDashBoard extends JFrame {
 		panel_4.add(btnNewButton_5);
 		
 		btnNewButton_6 = new JButton("Notes");
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_6.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnNewButton_6.setBackground(new Color(112, 128, 144));
 		btnNewButton_6.setBounds(512, 402, 440, 129);

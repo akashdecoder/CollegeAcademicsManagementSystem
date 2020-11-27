@@ -4,15 +4,21 @@ import javax.swing.border.EmptyBorder;
 
 import database.Database;
 import database.DatabaseOperation;
+import subjects.FirstYearSubjects;
+import subjects.SecondYearSubjects;
 
 import java.awt.Toolkit;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -21,6 +27,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 
 public class FacultyDashBoard extends JFrame {
 
@@ -316,15 +323,67 @@ public class FacultyDashBoard extends JFrame {
 		Upload_window.setBounds(339, 423, 281, 49);
 		panel_2.add(Upload_window);
 		
-		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Subject");
-		lblNewLabel_1_1_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_1_1_1_1_1.setBounds(14, 303, 142, 38);
-		panel_2.add(lblNewLabel_1_1_1_1_1);
+		JLabel subject_label = new JLabel("Subject");
+		subject_label.setFont(new Font("Tahoma", Font.BOLD, 18));
+		subject_label.setBounds(14, 303, 142, 38);
+		panel_2.add(subject_label);
 		
-		JComboBox<String> section_1 = new JComboBox<String>();
-		section_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		section_1.setBounds(172, 303, 448, 38);
-		panel_2.add(section_1);
+		JComboBox<String> subject = new JComboBox<String>();
+		subject.setFont(new Font("Tahoma", Font.BOLD, 14));
+		subject.setBounds(172, 303, 448, 38);
+		panel_2.add(subject);
+		
+		JButton connect_with_sem = new JButton("Connect Semester");
+		
+		connect_with_sem.setFont(new Font("Tahoma", Font.BOLD, 16));
+		connect_with_sem.setBackground(new Color(221, 160, 221));
+		connect_with_sem.setBounds(656, 207, 195, 38);
+		panel_2.add(connect_with_sem);
+		
+		String subject_1[] = new String[7];
+		String subject_2[] = new String[8];
+		connect_with_sem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if(semester.getSelectedItem().equals("I")) {
+						subject.removeAllItems();
+						FirstYearSubjects sem_1 = new FirstYearSubjects(subject_1, 
+								select_Branch.getSelectedItem().toString(),"I");
+						subject.addItem("---Select---");
+						for(int i=0 ;i<subject_1.length ;i++) {
+							subject.addItem(subject_1[i]);
+						}
+					} else if(semester.getSelectedItem().equals("II")) {
+						subject.removeAllItems();
+						FirstYearSubjects sem_2 = new FirstYearSubjects(subject_1,
+								select_Branch.getSelectedItem().toString(), "II");
+						subject.addItem("---Select---");
+						for(int i=0 ;i<subject_1.length ;i++) {
+							subject.addItem(subject_1[i]);
+						}
+					} else if(semester.getSelectedItem().equals("III")) {
+						subject.removeAllItems();
+						SecondYearSubjects sem_3 = new SecondYearSubjects(subject_2,
+								select_Branch.getSelectedItem().toString(), "III");
+						subject.addItem("---Select---");
+						for(int i=0 ;i<subject_2.length ;i++) {
+							subject.addItem(subject_2[i]);
+						}
+					} else if(semester.getSelectedItem().equals("IV")) {
+						subject.removeAllItems();
+						SecondYearSubjects sem_4 = new SecondYearSubjects(subject_2,
+								select_Branch.getSelectedItem().toString(), "IV");
+						subject.addItem("---Select---");
+						for(int i=0 ;i<subject_2.length ;i++) {
+							subject.addItem(subject_2[i]);
+						}
+					}
+				} catch(Exception exp) {
+					exp.printStackTrace();
+				}
+			}
+		});
+		
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(255, 255, 255));
@@ -338,6 +397,36 @@ public class FacultyDashBoard extends JFrame {
 		panel_4.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Upload Paper");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					DatabaseOperation dbo = new DatabaseOperation();
+					Database db = new Database();
+					Connection conn = dbo.getConnection(db.url, db.userName, db.userPassword);
+					Statement st = conn.createStatement();
+					ResultSet res = st.executeQuery("select * from faculty_database;");
+					
+					JFileChooser jFile = new JFileChooser();
+					jFile.setDialogTitle("Choose file");
+					int result = jFile.showSaveDialog(null);
+					if(result == JFileChooser.APPROVE_OPTION) {
+						File file = jFile.getSelectedFile();
+						FileReader reader = new FileReader(file.getAbsolutePath());
+						while(res.next()) {
+							if(FacultyLoginWindow.facultyname.equals(res.getString
+									("faculty_name"))) {
+								int status = dbo.uploadPaper(conn, 
+										res.getString("faculty_name"), reader);
+							}
+						}
+						JOptionPane.showMessageDialog(null,"File Uploaded");
+					}
+				} catch(Exception exp) {
+					JOptionPane.showMessageDialog(null, exp.getMessage());
+					exp.printStackTrace();
+				}
+			}
+		});
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnNewButton_1_1.setBackground(new Color(255, 204, 204));
 		btnNewButton_1_1.setBounds(518, 38, 404, 142);

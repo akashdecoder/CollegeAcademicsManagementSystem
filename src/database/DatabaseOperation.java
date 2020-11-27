@@ -1,4 +1,6 @@
 package database;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -83,6 +85,21 @@ public class DatabaseOperation {
 			status = pst.executeUpdate();
 			System.out.println("Inserted Successfully");
 		}catch(Exception exp) {
+			exp.printStackTrace();
+		}
+		return status;
+	}
+	
+	public int uploadPaper(Connection conn, String name, FileReader file) {
+		int status = 0;
+		PreparedStatement pst;
+		try {
+			pst = conn.prepareStatement("insert into faculty_upload_papers (name, "
+					+ "file) values(?, ?)");
+			pst.setString(1, name);
+			pst.setCharacterStream(2, file);
+			status = pst.executeUpdate();
+		} catch (Exception exp) {
 			exp.printStackTrace();
 		}
 		return status;

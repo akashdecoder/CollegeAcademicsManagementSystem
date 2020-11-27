@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
@@ -30,8 +31,12 @@ public class UploadMA extends JFrame {
 	private JTextField t2;
 	private JTextField others;
 	private JTextField total;
+	
+	private int total_cie = 0;
+	private int q1_credits = 0, q2_credits = 0, t1_credits = 0, q3_credits = 0, q4_credits = 0, t2_credits = 0;
 
 	public UploadMA() {
+		
 		setBackground(new Color(153, 0, 255));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 1200, 700);
@@ -163,41 +168,55 @@ public class UploadMA extends JFrame {
 		u_marks.add(lblNewLabel_2_6);
 		
 		q1 = new JTextField();
+		q1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		q1.setHorizontalAlignment(SwingConstants.CENTER);
 		q1.setBounds(10, 260, 88, 31);
 		u_marks.add(q1);
 		q1.setColumns(10);
 		
 		q2 = new JTextField();
+		q2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		q2.setHorizontalAlignment(SwingConstants.CENTER);
 		q2.setColumns(10);
 		q2.setBounds(117, 260, 88, 31);
 		u_marks.add(q2);
 		
 		t1 = new JTextField();
+		t1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		t1.setHorizontalAlignment(SwingConstants.CENTER);
 		t1.setColumns(10);
 		t1.setBounds(224, 260, 88, 31);
 		u_marks.add(t1);
 		
 		q3 = new JTextField();
+		q3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		q3.setHorizontalAlignment(SwingConstants.CENTER);
 		q3.setColumns(10);
 		q3.setBounds(331, 260, 88, 31);
 		u_marks.add(q3);
 		
 		q4 = new JTextField();
+		q4.setFont(new Font("Tahoma", Font.BOLD, 14));
+		q4.setHorizontalAlignment(SwingConstants.CENTER);
 		q4.setColumns(10);
 		q4.setBounds(438, 260, 88, 31);
 		u_marks.add(q4);
 		
 		t2 = new JTextField();
+		t2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		t2.setHorizontalAlignment(SwingConstants.CENTER);
 		t2.setColumns(10);
 		t2.setBounds(545, 260, 88, 31);
 		u_marks.add(t2);
 		
 		others = new JTextField();
+		others.setFont(new Font("Tahoma", Font.BOLD, 14));
+		others.setHorizontalAlignment(SwingConstants.CENTER);
 		others.setColumns(10);
 		others.setBounds(652, 260, 88, 31);
 		u_marks.add(others);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Total");
+		JLabel lblNewLabel_1_1_1 = new JLabel("Total CIE");
 		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel_1_1_1.setBounds(10, 475, 160, 31);
 		u_marks.add(lblNewLabel_1_1_1);
@@ -207,11 +226,12 @@ public class UploadMA extends JFrame {
 		total.setBounds(180, 475, 470, 31);
 		u_marks.add(total);
 		
-		JButton btnNewButton = new JButton("Calculate Total");
-		btnNewButton.setBackground(new Color(204, 102, 255));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnNewButton.setBounds(331, 359, 190, 52);
-		u_marks.add(btnNewButton);
+		JButton total_button = new JButton("Calculate Total");
+		
+		total_button.setBackground(new Color(204, 102, 255));
+		total_button.setFont(new Font("Tahoma", Font.BOLD, 18));
+		total_button.setBounds(331, 359, 190, 52);
+		u_marks.add(total_button);
 		
 		JButton btnUpload = new JButton("Upload");
 		btnUpload.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -263,6 +283,78 @@ public class UploadMA extends JFrame {
 					tabbedPane.setSelectedIndex(1);
 				} catch(Exception exp) {
 					exp.printStackTrace();
+				}
+			}
+		});
+		
+		total_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if(q1.getText().isEmpty() && q2.getText().isEmpty() && t1.getText().isEmpty() && 
+							q3.getText().isEmpty() && q4.getText().isEmpty() && t2.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null,"Empty Fields");
+					} else {
+						if(!q1.getText().toString().isEmpty()) {
+							q1_credits = Integer.parseInt(q1.getText().toString());
+							total_cie = q1_credits;
+						}
+						if(!q1.getText().toString().isEmpty() && !q2.getText().toString().isEmpty()) {
+							q1_credits = Integer.parseInt(q1.getText().toString());
+							q2_credits = Integer.parseInt(q2.getText().toString());
+							total_cie = q1_credits + q2_credits;
+						}
+						if(!q1.getText().toString().isEmpty() && !q2.getText().toString().isEmpty()) {
+							q1_credits = Integer.parseInt(q1.getText().toString());
+							q2_credits = Integer.parseInt(q2.getText().toString());
+							total_cie = q1_credits + q2_credits;
+						}
+						if(!q1.getText().toString().isEmpty() && !q2.getText().toString().isEmpty()
+								&& !t1.getText().toString().isEmpty()) {
+							q1_credits = Integer.parseInt(q1.getText().toString());
+							q2_credits = Integer.parseInt(q2.getText().toString());
+							t1_credits = Integer.parseInt(t1.getText().toString());
+							total_cie = q1_credits + q2_credits+t1_credits;
+						}
+						if(!q1.getText().toString().isEmpty() && !q2.getText().toString().isEmpty()
+								&& !t1.getText().toString().isEmpty() 
+								&& !q3.getText().toString().isEmpty()) {
+							q1_credits = Integer.parseInt(q1.getText().toString());
+							q2_credits = Integer.parseInt(q2.getText().toString());
+							t1_credits = Integer.parseInt(t1.getText().toString());
+							q3_credits = Integer.parseInt(q3.getText().toString());
+							total_cie = q1_credits + q2_credits + t1_credits + q3_credits;
+						}
+						if(!q1.getText().toString().isEmpty() && !q2.getText().toString().isEmpty()
+								&& !t1.getText().toString().isEmpty() 
+								&& !q3.getText().toString().isEmpty()
+								&& !q4.getText().toString().isEmpty()) {
+							q1_credits = Integer.parseInt(q1.getText().toString());
+							q2_credits = Integer.parseInt(q2.getText().toString());
+							t1_credits = Integer.parseInt(t1.getText().toString());
+							q3_credits = Integer.parseInt(q3.getText().toString());
+							q4_credits = Integer.parseInt(q4.getText().toString());
+							total_cie = q1_credits + q2_credits + t1_credits + q3_credits
+									+ q4_credits;
+						}
+						if(!q1.getText().toString().isEmpty() && !q2.getText().toString().isEmpty()
+								&& !t1.getText().toString().isEmpty() 
+								&& !q3.getText().toString().isEmpty()
+								&& !q4.getText().toString().isEmpty()
+								&& !t2.getText().toString().isEmpty()) {
+							q1_credits = Integer.parseInt(q1.getText().toString());
+							q2_credits = Integer.parseInt(q2.getText().toString());
+							t1_credits = Integer.parseInt(t1.getText().toString());
+							q3_credits = Integer.parseInt(q3.getText().toString());
+							q4_credits = Integer.parseInt(q4.getText().toString());
+							t2_credits = Integer.parseInt(t2.getText().toString());
+							total_cie = q1_credits + q2_credits + t1_credits + q3_credits
+									+ q4_credits + t2_credits;
+						}
+						total.setText(Integer.toString(total_cie));
+					}
+				} catch(Exception exp) {
+					exp.printStackTrace();
+					JOptionPane.showMessageDialog(null,exp.getMessage());
 				}
 			}
 		});

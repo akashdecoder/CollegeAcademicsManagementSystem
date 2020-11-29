@@ -475,11 +475,22 @@ public class FacultyDashBoard extends JFrame {
 		btnNewButton_1_2.setBounds(39, 233, 404, 142);
 		panel_4.add(btnNewButton_1_2);
 		
-		JButton btnNewButton_1_1_1 = new JButton("Update Profile");
-		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnNewButton_1_1_1.setBackground(new Color(204, 204, 102));
-		btnNewButton_1_1_1.setBounds(518, 233, 404, 142);
-		panel_4.add(btnNewButton_1_1_1);
+		JButton update_profile = new JButton("Update Profile");
+		update_profile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					UpdateFacultyProfile frame = new UpdateFacultyProfile();
+					frame.setVisible(true);
+					dispose();
+				} catch(Exception exp) {
+					
+				}
+			}
+		});
+		update_profile.setFont(new Font("Tahoma", Font.BOLD, 18));
+		update_profile.setBackground(new Color(204, 204, 102));
+		update_profile.setBounds(518, 233, 404, 142);
+		panel_4.add(update_profile);
 		
 		JButton btnNewButton_1_2_1 = new JButton("Upload Assignment");
 		btnNewButton_1_2_1.setFont(new Font("Tahoma", Font.BOLD, 18));

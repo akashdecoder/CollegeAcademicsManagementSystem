@@ -123,4 +123,36 @@ public class DatabaseOperation {
 		}
 		return status;
 	}
+	
+	public int updateFacultyProfile(Connection conn, String name_to_update,  String name, String branch, String yearOfJoining, String speciality,
+			String degree, String designation, String email, String password) {
+		
+		int status = 0;
+		PreparedStatement pst;
+		try {
+			pst = conn.prepareStatement("update faculty_database "
+					+ "set faculty_name = ?, "
+					+ "faculty_branch = ?, "
+					+ "year_of_joining = ?, "
+					+ "speciality = ?, "
+					+ "degree = ?, "
+					+ "designation = ?, "
+					+ "faculty_email = ?, "
+					+ "faculty_password = ? "
+					+ "where faculty_name = ?;");
+			pst.setString(1, name);
+			pst.setString(2, branch);
+			pst.setString(3, yearOfJoining);
+			pst.setString(4, speciality);
+			pst.setString(5, degree);
+			pst.setString(6, designation);
+			pst.setString(7, email);
+			pst.setString(8, password);
+			pst.setString(9, name_to_update);
+			status = pst.executeUpdate();
+		} catch (SQLException exp) {
+			exp.printStackTrace();
+		}
+		return status;
+	}
 }

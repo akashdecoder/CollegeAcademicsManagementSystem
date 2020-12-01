@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class UpdateFacultyProfile extends JFrame {
 
@@ -195,6 +196,7 @@ public class UpdateFacultyProfile extends JFrame {
 		JButton update = new JButton("Update");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Boolean flag = false;
 				try {
 					System.out.println(FacultyLoginWindow.facultyname);
 					DatabaseOperation dbo = new DatabaseOperation();
@@ -207,18 +209,22 @@ public class UpdateFacultyProfile extends JFrame {
 								("faculty_name")) && 
 								f_pass.getText().equals(f_cpass.getText()) && 
 								confirm_update.isSelected()) {
-							dbo.updateFacultyProfile(conn, FacultyLoginWindow.facultyname, 
-									f_name.getText().toString(), 
-									f_branch.getSelectedItem().toString(), 
-									f_joiningBox.getSelectedItem().toString(), 
-									f_speciality.getText().toString(), 
-									f_degree_box.getSelectedItem().toString(), 
-									f_designationBox.getSelectedItem().toString(), 
-									f_email.getText().toString(), f_pass.getText().toString());
-							JOptionPane.showMessageDialog(null,"Profile Updated");
-						} else {
-							JOptionPane.showMessageDialog(null,"Password Mismatch");
+							flag = true;
+							break;
 						}
+					}
+					if(flag == true) { 
+						dbo.updateFacultyProfile(conn, FacultyLoginWindow.facultyname, 
+								f_name.getText().toString(), 
+								f_branch.getSelectedItem().toString(), 
+								f_joiningBox.getSelectedItem().toString(), 
+								f_speciality.getText().toString(), 
+								f_degree_box.getSelectedItem().toString(), 
+								f_designationBox.getSelectedItem().toString(), 
+								f_email.getText().toString(), f_pass.getText().toString());
+						JOptionPane.showMessageDialog(null,"Profile Updated");
+					} else {
+						JOptionPane.showMessageDialog(null,"Error, Please Check your details or contact Software Vendor");
 					}
 					
 				} catch(Exception exp) {
@@ -231,13 +237,19 @@ public class UpdateFacultyProfile extends JFrame {
 		update.setBounds(112, 563, 208, 52);
 		panel.add(update);
 		
-		JButton cancel = new JButton("Cancel");
+		JButton cancel = new JButton("Reset");
 		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					FacultyDashBoard frame = new FacultyDashBoard();
-					frame.setVisible(true);
-					dispose();
+					f_name.setText("");;
+					f_speciality.setText("");;
+					f_email.setText("");
+					f_pass.setText("");
+					f_cpass.setText("");
+					f_branch.setSelectedIndex(0);
+					f_joiningBox.setSelectedIndex(0);
+					f_degree_box.setSelectedIndex(0);
+					f_designationBox.setSelectedIndex(0);
 				} catch(Exception exp) {
 					exp.printStackTrace();
 				}
@@ -262,5 +274,22 @@ public class UpdateFacultyProfile extends JFrame {
 		btnNewButton_1_2_1.setBackground(new Color(255, 250, 205));
 		btnNewButton_1_2_1.setBounds(843, 237, 208, 52);
 		panel.add(btnNewButton_1_2_1);
+		
+		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					FacultyDashBoard frame = new FacultyDashBoard();
+					frame.setVisible(true);
+					dispose();
+				} catch(Exception exp) {
+					exp.printStackTrace();
+				}
+			}
+		});
+		btnNewButton_1.setIcon(new ImageIcon("D:\\icons\\left-arrow.png"));
+		btnNewButton_1.setBackground(Color.WHITE);
+		btnNewButton_1.setBounds(0, 0, 76, 73);
+		panel.add(btnNewButton_1);
 	}
 }

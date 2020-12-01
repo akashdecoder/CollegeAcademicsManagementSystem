@@ -1,26 +1,31 @@
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import database.Database;
-import database.DatabaseOperation;
-
+import java.awt.BorderLayout;
 import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.awt.event.ActionEvent;
-import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import database.Database;
+import database.DatabaseOperation;
+import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FacultyLoginWindow extends JFrame {
+
 	public static String facultyname;
 	private JPanel contentPane;
 	private JTextField facultyName;
@@ -86,7 +91,7 @@ public class FacultyLoginWindow extends JFrame {
 		});
 		facultyLoginButton.setBackground(new Color(173, 255, 47));
 		facultyLoginButton.setFont(new Font("Tahoma", Font.BOLD, 22));
-		facultyLoginButton.setBounds(234, 431, 213, 55);
+		facultyLoginButton.setBounds(82, 415, 213, 55);
 		contentPane.add(facultyLoginButton);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
@@ -110,5 +115,24 @@ public class FacultyLoginWindow extends JFrame {
 		backtoDashBoard.setIcon(new ImageIcon("D:\\icons\\left-arrow.png"));
 		backtoDashBoard.setBounds(9, 17, 77, 71);
 		contentPane.add(backtoDashBoard);
+		
+		JLabel lblNewLabel_2 = new JLabel("Forgot Password ?");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					ForgotPassword frame = new ForgotPassword("Faculty");
+					frame.setVisible(true);
+					dispose();
+				} catch(Exception exp) {
+					exp.printStackTrace();
+				}
+			}
+		});
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(365, 415, 197, 55);
+		contentPane.add(lblNewLabel_2);
 	}
+
 }

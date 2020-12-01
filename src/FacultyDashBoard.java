@@ -483,7 +483,7 @@ public class FacultyDashBoard extends JFrame {
 					frame.setVisible(true);
 					dispose();
 				} catch(Exception exp) {
-					
+					exp.printStackTrace();
 				}
 			}
 		});

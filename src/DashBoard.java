@@ -5,17 +5,22 @@ import javax.swing.border.EmptyBorder;
 import database.Database;
 import database.DatabaseOperation;
 
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
@@ -41,7 +46,7 @@ public class DashBoard extends JFrame {
 	private JTextField text_fpassword;
 	private JTextField text_confirmPass;
 	public DashBoard() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\akashdecoder.github.io-master\\SIT-Tumkur-Logo.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\akashdecoder.github.io-master\\akashdecoder.github.io-master\\Sit.png"));
 		setTitle("College Academics Management System");
 		setBackground(new Color(153, 51, 204));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,8 +91,9 @@ public class DashBoard extends JFrame {
 		homeButton_3.setFont(new Font("Tahoma", Font.BOLD, 18));
 		homeButton_3.setBackground(new Color(0, 128, 128));
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon("D:\\akashdecoder.github.io-master\\SIT-Tumkur-Logo.png"));
+
+		JLabel lblNewLabel_2 = new JLabel();
+		lblNewLabel_2.setIcon(new ImageIcon("D:\\akashdecoder.github.io-master\\akashdecoder.github.io-master\\SIT-Tumkur-Logo.png"));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(

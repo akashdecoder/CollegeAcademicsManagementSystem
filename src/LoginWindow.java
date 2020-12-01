@@ -21,6 +21,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.sql.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginWindow extends JFrame {
 	public static String st_usn;
@@ -87,7 +89,7 @@ public class LoginWindow extends JFrame {
 		});
 		login.setBackground(new Color(152, 251, 152));
 		login.setFont(new Font("Tahoma", Font.BOLD, 22));
-		login.setBounds(222, 438, 179, 53);
+		login.setBounds(165, 404, 179, 53);
 		contentPane.add(login);
 		
 		JButton btnNewButton_1 = new JButton("");
@@ -111,5 +113,22 @@ public class LoginWindow extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon("D:\\akashdecoder.github.io-master\\SIT-Tumkur-Logo.png"));
 		lblNewLabel_1.setBounds(261, 10, 203, 200);
 		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Forgot Password ?");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					ForgotPassword frame = new ForgotPassword("Student");
+					frame.setVisible(true);
+					dispose();
+				} catch(Exception exp) {
+					exp.printStackTrace();
+				}
+			}
+		});
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_2.setBounds(372, 404, 179, 53);
+		contentPane.add(lblNewLabel_2);
 	}
 }

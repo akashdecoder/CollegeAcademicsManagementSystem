@@ -92,7 +92,7 @@ public class StudentDashBoard extends JFrame {
 	private JTextField textField_55;
 	private JTextField txtEleigible;
 	private JTextField txtPercentage;
-	private JButton btnNewButton_1;
+	private JButton update_profile;
 	private JButton btnNewButton_2;
 	private JButton btnNewButton_3;
 	private JButton btnNewButton_4;
@@ -736,11 +736,22 @@ public class StudentDashBoard extends JFrame {
 		tabbedPane.addTab("Others", null, panel_4, null);
 		panel_4.setLayout(null);
 		
-		btnNewButton_1 = new JButton("Update Profile");
-		btnNewButton_1.setBackground(new Color(221, 160, 221));
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnNewButton_1.setBounds(29, 38, 440, 129);
-		panel_4.add(btnNewButton_1);
+		update_profile = new JButton("Update Profile");
+		update_profile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					UpdateStudentProfile frame = new UpdateStudentProfile();
+					frame.setVisible(true);
+					dispose();
+				} catch(Exception exp) {
+					exp.printStackTrace();
+				}
+			}
+		});
+		update_profile.setBackground(new Color(221, 160, 221));
+		update_profile.setFont(new Font("Tahoma", Font.BOLD, 18));
+		update_profile.setBounds(29, 38, 440, 129);
+		panel_4.add(update_profile);
 		
 		btnNewButton_2 = new JButton("Exam Registration");
 		btnNewButton_2.addActionListener(new ActionListener() {

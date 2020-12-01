@@ -54,6 +54,7 @@ public class ConnectDatabase extends JFrame {
 					if(ip_addr.getText().equals(localhost.getHostAddress())) {
 						DashBoard frame = new DashBoard();
 						frame.setVisible(true);
+						dispose();
 						JOptionPane.showMessageDialog(null, "Connected to Database Server");
 					} else {
 						JOptionPane.showMessageDialog(null, "Wrong IP Address");

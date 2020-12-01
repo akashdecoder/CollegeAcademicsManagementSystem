@@ -1,5 +1,4 @@
 package database;
-import java.io.File;
 import java.io.FileReader;
 import java.sql.*;
 import java.time.LocalDate;
@@ -151,6 +150,56 @@ public class DatabaseOperation {
 			pst.setString(9, name_to_update);
 			status = pst.executeUpdate();
 		} catch (SQLException exp) {
+			exp.printStackTrace();
+		}
+		return status;
+	}
+	
+	public int updateStudentProfile(Connection conn, String profile_to_update, 
+			String name, String usn, String email, String password) {
+		int status = 0;
+		String branchCode[] = {"CS", "EC", "IS", "EI", "EE", "ME"};
+		String branchArray[] = {"Computer Science Engineering",
+								"Electronics Communication Engineering",
+								"Informtaion Science Engineering",
+								"Electronics Instrumentation Engineering",
+								"Electrical Electronics Engineering",
+								"Mechanical Engineering"};
+		String branch = null;
+		int year, student_year;
+		PreparedStatement pst;
+		try {
+			for(int i=0;i<branchCode.length;i++) {
+				if(usn.substring(5, 7).equalsIgnoreCase(branchCode[i])) {
+					branch = branchArray[i];
+				}
+			}
+			Date date = new Date();
+			LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			year = localDate.getYear();
+			String usn_date = "20"+usn.substring(3,5);
+			if(Integer.parseInt(usn_date) == year) {
+				student_year = 1;
+			} else {
+				student_year = year - Integer.parseInt(usn_date) + 1;
+			}
+			pst = conn.prepareStatement("update student_database "
+					+ "set student_name = ?, "
+					+ "student_usn = ?, "
+					+ "student_branch = ?, "
+					+ "student_year = ?, "
+					+ "student_email = ?, "
+					+ "student_password = ? where student_usn = ?;");
+			pst.setString(1, name);
+			pst.setString(2, usn);
+			pst.setString(3, branch);
+			pst.setInt(4, student_year);
+			pst.setString(5, email);
+			pst.setString(6, password);
+			pst.setString(7, profile_to_update);
+			status = pst.executeUpdate();
+			System.out.println("Updated Successfully");
+		}catch(Exception exp) {
 			exp.printStackTrace();
 		}
 		return status;

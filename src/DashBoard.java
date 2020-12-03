@@ -260,7 +260,7 @@ public class DashBoard extends JFrame {
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					LoginWindow frame = new LoginWindow();
+					LoginWindow frame = new LoginWindow("Student");
 					frame.setVisible(true);
 					dispose();
 				}catch(Exception exp) {
@@ -295,11 +295,11 @@ public class DashBoard extends JFrame {
 		btnNewButton_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					dispose();
 //					FacultyDashBoard frame = new FacultyDashBoard();
 //					frame.setVisible(true);
-					FacultyLoginWindow frame = new FacultyLoginWindow();
+					LoginWindow frame = new LoginWindow("Faculty");
 					frame.setVisible(true);
+					dispose();
 				} catch(Exception exp) {
 					exp.printStackTrace();
 				}

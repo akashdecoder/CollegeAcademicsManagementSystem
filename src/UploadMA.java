@@ -1,11 +1,11 @@
-
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import database.Database;
+import database.DatabaseOperation;
+import subjects.FirstYearSubjects;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,9 +14,15 @@ import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class UploadMA extends JFrame {
 
@@ -36,6 +42,8 @@ public class UploadMA extends JFrame {
 	private int q1_credits = 0, q2_credits = 0, t1_credits = 0, q3_credits = 0, q4_credits = 0, t2_credits = 0;
 
 	public UploadMA() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\akashdecoder.github.io-master\\SIT-Tumkur-Logo.png"));
+		setTitle("Upload Marks & Attendance");
 		
 		setBackground(new Color(153, 0, 255));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -355,6 +363,95 @@ public class UploadMA extends JFrame {
 				} catch(Exception exp) {
 					exp.printStackTrace();
 					JOptionPane.showMessageDialog(null,exp.getMessage());
+				}
+			}
+		});
+		
+		String subject_1[] = new String[7];
+		String subject_2[] = new String[8];
+		btnUpload.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean isPresent = false;
+				try {
+					DatabaseOperation dbo = new DatabaseOperation();
+					Database db = new Database();
+					Connection conn = dbo.getConnection(db.url, db.userName, db.userPassword);
+					Statement st = conn.createStatement();
+					PreparedStatement pst, pst1;
+					ResultSet res = st.executeQuery("select * from student_database;");
+					while(res.next()) {
+						if(usn_text.getText().toString().equals(res.getString("student_usn"))) {
+							if(FacultyDashBoard.sem == "I") {
+								isPresent = false;
+								FirstYearSubjects sem_1 = new FirstYearSubjects(subject_1, 
+										FacultyDashBoard.branch,"I");
+								for(int i=0; i<subject_1.length; i++) {
+									if(FacultyDashBoard.subject.equals(subject_1[i])) {
+										res = st.executeQuery("select * from 1_cse_i;");
+										while(res.next()) {
+											if((usn_text.getText().toString().equals(res.getString("usn"))) && 
+													(res.getInt("count_insert") > 0)) {
+												isPresent = true;
+												String update_query = "update 1_cse_i "
+														+ "set `" + subject_1[i] + "` = ? where usn = ?;";
+												pst1 = conn.prepareStatement(update_query);
+												pst1.setInt(1, total_cie);
+												pst1.setString(2, usn_text.getText().toString());
+												int status1 = pst1.executeUpdate();
+											}
+										}
+										if(isPresent == false) {
+											String sql_query = "insert into 1_cse_i(usn, name, `" + subject_1[i] + "`, count_insert) values (?, ?, ?, ?)";
+											System.out.println(sql_query);
+											pst = conn.prepareStatement(sql_query);
+											pst.setString(1, usn_text.getText().toString());
+											pst.setString(2, name_text.getText().toString());
+											pst.setInt(3, total_cie);
+											pst.setInt(4, 1);
+											int status = pst.executeUpdate();
+										}
+									}
+								}
+							} else if(FacultyDashBoard.sem == "II") {
+								isPresent = false;
+								FirstYearSubjects sem_1 = new FirstYearSubjects(subject_1, 
+										FacultyDashBoard.branch,"II");
+								for(int i=0; i<subject_1.length; i++) {
+									if(FacultyDashBoard.subject.equals(subject_1[i])) {
+										res = st.executeQuery("select * from 1_cse_ii;");
+										while(res.next()) {
+											if((usn_text.getText().toString().equals(res.getString("usn"))) && 
+													(res.getInt("count_insert") > 0)) {
+												isPresent = true;
+												String update_query = "update 1_cse_ii "
+														+ "set `" + subject_1[i] + "` = ? where usn = ?;";
+												pst1 = conn.prepareStatement(update_query);
+												pst1.setInt(1, total_cie);
+												pst1.setString(2, usn_text.getText().toString());
+												int status1 = pst1.executeUpdate();
+											}
+										}
+										if(isPresent == false) {
+											String sql_query = "insert into 1_cse_ii(usn, name, `" + subject_1[i] + "`, count_insert) values (?, ?, ?, ?)";
+											System.out.println(sql_query);
+											pst = conn.prepareStatement(sql_query);
+											pst.setString(1, usn_text.getText().toString());
+											pst.setString(2, name_text.getText().toString());
+											pst.setInt(3, total_cie);
+											pst.setInt(4, 1);
+											int status = pst.executeUpdate();
+										}
+									}
+								}
+							} else if(FacultyDashBoard.sem == "III") {
+								
+							} else if(FacultyDashBoard.sem == "IV") {
+								
+							}
+						}
+					}
+				} catch(SQLException  exp) {
+					exp.printStackTrace();
 				}
 			}
 		});

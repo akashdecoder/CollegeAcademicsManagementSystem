@@ -35,7 +35,7 @@ public class ForgotPassword extends JFrame {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\akashdecoder.github.io-master\\akashdecoder.github.io-master\\SIT-Tumkur-Logo.png"));
 		setTitle("Reset Password");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -148,7 +148,7 @@ public class ForgotPassword extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(Category.equals("Student")) {
-						LoginWindow frame = new LoginWindow();
+						LoginWindow frame = new LoginWindow("Student");
 						frame.setVisible(true);
 						dispose();
 					} else if(Category.equals("Faculty")) {
@@ -163,7 +163,7 @@ public class ForgotPassword extends JFrame {
 		});
 		btnNewButton_1.setIcon(new ImageIcon("D:\\icons\\left-arrow.png"));
 		btnNewButton_1.setBackground(new Color(255, 245, 238));
-		btnNewButton_1.setBounds(0, 0, 76, 73);
+		btnNewButton_1.setBounds(10, 10, 76, 73);
 		panel.add(btnNewButton_1);
 	}
 }

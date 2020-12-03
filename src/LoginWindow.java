@@ -26,13 +26,19 @@ import java.awt.event.MouseEvent;
 
 public class LoginWindow extends JFrame {
 	public static String st_usn;
+	public static String facultyname;
 	private JPanel contentPane;
-	private JTextField usn;
+	private JTextField username;
 	private JTextField password;
-	public LoginWindow() {
+	public LoginWindow(String category) {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\akashdecoder.github.io-master\\SIT-Tumkur-Logo.png"));
-		setTitle("College Academics Management System | Student Login");
+		if(category.equals("Student")) {
+			setTitle("College Academics Management System | Student Login");
+		} else {
+			setTitle("College Academics Management System | Faculty Login");
+		}
+		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 751, 584);
 		contentPane = new JPanel();
@@ -41,7 +47,7 @@ public class LoginWindow extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("USN");
+		JLabel lblNewLabel = new JLabel("Username");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel.setBounds(51, 232, 142, 37);
 		contentPane.add(lblNewLabel);
@@ -51,14 +57,14 @@ public class LoginWindow extends JFrame {
 		lblPassword.setBounds(51, 299, 142, 37);
 		contentPane.add(lblPassword);
 		
-		usn = new JTextField();
-		usn.setFont(new Font("Tahoma", Font.BOLD, 12));
-		usn.setBounds(222, 232, 384, 37);
-		contentPane.add(usn);
-		usn.setColumns(10);
+		username = new JTextField();
+		username.setFont(new Font("Tahoma", Font.BOLD, 16));
+		username.setBounds(222, 232, 384, 37);
+		contentPane.add(username);
+		username.setColumns(10);
 		
 		password = new JTextField();
-		password.setFont(new Font("Tahoma", Font.BOLD, 12));
+		password.setFont(new Font("Tahoma", Font.BOLD, 16));
 		password.setColumns(10);
 		password.setBounds(222, 299, 384, 37);
 		contentPane.add(password);
@@ -71,18 +77,35 @@ public class LoginWindow extends JFrame {
 					Database db = new Database();
 					Connection conn = dbo.getConnection(db.url, db.userName, db.userPassword);
 					Statement st = conn.createStatement();
-					ResultSet res = st.executeQuery("select * from student_database;");
-					while(res.next()) {
-						if((usn.getText().toString().equals(res.getString("student_usn"))) && 
-								(password.getText().toString().equals(res.getString("student_password")))) {
-							st_usn = res.getString("student_usn");
-							StudentDashBoard frame = new StudentDashBoard();
-							frame.setVisible(true);
-							dispose();
-							JOptionPane.showMessageDialog(null,"Logged in as " + res.getString("student_name"));
+					if(category.equals("Student")) {
+						ResultSet res = st.executeQuery("select * from student_database;");
+						while(res.next()) {
+							
+							if((username.getText().toString().equals(res.getString("student_usn"))) && 
+									(password.getText().toString().equals(res.getString("student_password")))) {
+								st_usn = res.getString("student_usn");
+								StudentDashBoard frame = new StudentDashBoard();
+								frame.setVisible(true);
+								dispose();
+								JOptionPane.showMessageDialog(null,"Logged in as " + res.getString("student_name"));
+							}
+						}
+					} else if(category.equals("Faculty")) {
+						ResultSet res = st.executeQuery("select * from faculty_database;");
+						while(res.next()) {
+							if((username.getText().toString().equals(res.getString("faculty_name"))) && 
+									(password.getText().toString().equals(res.getString("faculty_password")))) {
+								facultyname = res.getString("faculty_name");
+								FacultyDashBoard frame = new FacultyDashBoard();
+								frame.setVisible(true);
+								dispose();
+								JOptionPane.showMessageDialog(null,"Logged in as " + res.getString("faculty_name"));
+							}
 						}
 					}
+					
 				} catch(Exception exp) {
+					exp.printStackTrace();
 					JOptionPane.showMessageDialog(null,exp.getMessage());
 				}
 			}
@@ -119,7 +142,7 @@ public class LoginWindow extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					ForgotPassword frame = new ForgotPassword("Student");
+					SendVerificationMail frame = new SendVerificationMail(category);
 					frame.setVisible(true);
 					dispose();
 				} catch(Exception exp) {

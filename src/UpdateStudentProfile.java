@@ -178,7 +178,7 @@ public class UpdateStudentProfile extends JFrame {
 		lblNewLabel_1_8.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_8.setForeground(new Color(186, 85, 211));
 		lblNewLabel_1_8.setFont(new Font("Tahoma", Font.BOLD, 34));
-		lblNewLabel_1_8.setBounds(132, 31, 625, 78);
+		lblNewLabel_1_8.setBounds(132, 10, 625, 78);
 		panel.add(lblNewLabel_1_8);
 		
 		JButton btnNewButton_1 = new JButton("");
@@ -195,7 +195,7 @@ public class UpdateStudentProfile extends JFrame {
 		});
 		btnNewButton_1.setIcon(new ImageIcon("D:\\icons\\left-arrow.png"));
 		btnNewButton_1.setBackground(Color.WHITE);
-		btnNewButton_1.setBounds(0, 0, 76, 73);
+		btnNewButton_1.setBounds(10, 10, 76, 73);
 		panel.add(btnNewButton_1);
 	}
 }

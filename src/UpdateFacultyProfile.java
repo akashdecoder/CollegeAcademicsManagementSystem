@@ -198,14 +198,14 @@ public class UpdateFacultyProfile extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Boolean flag = false;
 				try {
-					System.out.println(FacultyLoginWindow.facultyname);
+					System.out.println(LoginWindow.facultyname);
 					DatabaseOperation dbo = new DatabaseOperation();
 					Database db = new Database();
 					Connection conn = dbo.getConnection(db.url, db.userName, db.userPassword);
 					Statement st = conn.createStatement();
 					ResultSet res = st.executeQuery("select * from faculty_database;");
 					while(res.next()) {
-						if(FacultyLoginWindow.facultyname.equals(res.getString
+						if(LoginWindow.facultyname.equals(res.getString
 								("faculty_name")) && 
 								f_pass.getText().equals(f_cpass.getText()) && 
 								confirm_update.isSelected()) {
@@ -214,7 +214,7 @@ public class UpdateFacultyProfile extends JFrame {
 						}
 					}
 					if(flag == true) { 
-						dbo.updateFacultyProfile(conn, FacultyLoginWindow.facultyname, 
+						dbo.updateFacultyProfile(conn, LoginWindow.facultyname, 
 								f_name.getText().toString(), 
 								f_branch.getSelectedItem().toString(), 
 								f_joiningBox.getSelectedItem().toString(), 
@@ -289,7 +289,7 @@ public class UpdateFacultyProfile extends JFrame {
 		});
 		btnNewButton_1.setIcon(new ImageIcon("D:\\icons\\left-arrow.png"));
 		btnNewButton_1.setBackground(Color.WHITE);
-		btnNewButton_1.setBounds(0, 0, 76, 73);
+		btnNewButton_1.setBounds(10, 10, 76, 73);
 		panel.add(btnNewButton_1);
 	}
 }

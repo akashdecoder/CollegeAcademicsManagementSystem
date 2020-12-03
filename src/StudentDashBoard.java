@@ -153,7 +153,7 @@ public class StudentDashBoard extends JFrame {
 		btnOthers.setBounds(0, 514, 297, 45);
 		panel.add(btnOthers);
 		
-		JButton btnEit = new JButton("Exit");
+		JButton btnEit = new JButton("Logout");
 		btnEit.setForeground(new Color(0, 0, 0));
 		
 		btnEit.setBackground(new Color(0, 139, 139));

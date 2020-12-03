@@ -51,6 +51,7 @@ public class ConnectDatabase extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					InetAddress localhost = InetAddress.getLocalHost();
+					System.out.println(localhost.getHostAddress());
 					if(ip_addr.getText().equals(localhost.getHostAddress())) {
 						DashBoard frame = new DashBoard();
 						frame.setVisible(true);

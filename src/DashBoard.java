@@ -53,7 +53,7 @@ public class DashBoard extends JFrame {
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 1080, 700);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(153, 51, 204));
+		contentPane.setBackground(new Color(153, 51, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -129,14 +129,14 @@ public class DashBoard extends JFrame {
 		contentPane.add(tabbedPane);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(255, 240, 245));
+		panel_1.setBackground(new Color(255, 255, 255));
 		tabbedPane.addTab("Home", null, panel_1, null);
 		panel_1.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Departments");
 		btnNewButton.setIcon(new ImageIcon("D:\\icons\\programing.png"));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnNewButton.setBackground(new Color(135, 206, 235));
+		btnNewButton.setBackground(new Color(204, 51, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -147,7 +147,7 @@ public class DashBoard extends JFrame {
 		
 		JButton btnPlacement = new JButton("Placement");
 		btnPlacement.setIcon(new ImageIcon("D:\\icons\\recruit.png"));
-		btnPlacement.setBackground(new Color(221, 160, 221));
+		btnPlacement.setBackground(new Color(153, 255, 255));
 		btnPlacement.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnPlacement.setForeground(new Color(0, 0, 0));
 		btnPlacement.setBounds(430, 45, 300, 150);
@@ -155,14 +155,14 @@ public class DashBoard extends JFrame {
 		
 		JButton btnAcademicCalender = new JButton("Calender");
 		btnAcademicCalender.setIcon(new ImageIcon("D:\\icons\\calendar.png"));
-		btnAcademicCalender.setBackground(new Color(222, 184, 135));
+		btnAcademicCalender.setBackground(new Color(204, 204, 255));
 		btnAcademicCalender.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAcademicCalender.setBounds(52, 263, 300, 150);
 		panel_1.add(btnAcademicCalender);
 		
 		JButton btnAchievements = new JButton("Contact Us");
 		btnAchievements.setIcon(new ImageIcon("D:\\icons\\contacts-book.png"));
-		btnAchievements.setBackground(new Color(152, 251, 152));
+		btnAchievements.setBackground(new Color(102, 153, 153));
 		btnAchievements.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnAchievements.setBounds(430, 263, 300, 150);
 		panel_1.add(btnAchievements);
@@ -295,8 +295,6 @@ public class DashBoard extends JFrame {
 		btnNewButton_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-//					FacultyDashBoard frame = new FacultyDashBoard();
-//					frame.setVisible(true);
 					LoginWindow frame = new LoginWindow("Faculty");
 					frame.setVisible(true);
 					dispose();

@@ -204,4 +204,19 @@ public class DatabaseOperation {
 		}
 		return status;
 	}
+	
+	public int insertIntoLogins(Connection conn, Timestamp timeStamp, String username) {
+		int status = 0;
+		PreparedStatement pst;
+		
+		try {
+			pst = conn.prepareStatement("insert into logins (`date & time`, username) values (?, ?);");
+			pst.setTimestamp(1, timeStamp);
+			pst.setString(2, username);
+			status = pst.executeUpdate();
+		} catch(Exception exp) {
+			exp.printStackTrace();
+		}
+		return status;
+	}
 }

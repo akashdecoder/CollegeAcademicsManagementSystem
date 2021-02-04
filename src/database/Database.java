@@ -15,7 +15,7 @@ public class Database {
 		return ipAddress;
 	}
 	
-	public String url = "jdbc:mysql://" + getIpAddr() +  ":3306/cams_database?allowPublicKeyRetrieval=true&useSSL=false";
+	public String url = "jdbc:mysql://172.24.112.1:3306/cams_database?allowPublicKeyRetrieval=true&useSSL=false";
 	public String userName = "root";
 	public String userPassword = "Github@2020";
 }

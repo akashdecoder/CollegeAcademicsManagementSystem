@@ -77,6 +77,7 @@ public class LoginWindow extends JFrame {
 					Database db = new Database();
 					Connection conn = dbo.getConnection(db.url, db.userName, db.userPassword);
 					Statement st = conn.createStatement();
+					PreparedStatement pstPreparedStatement;
 					if(category.equals("Student")) {
 						ResultSet res = st.executeQuery("select * from student_database;");
 						while(res.next()) {
@@ -84,6 +85,9 @@ public class LoginWindow extends JFrame {
 							if((username.getText().toString().equals(res.getString("student_usn"))) && 
 									(password.getText().toString().equals(res.getString("student_password")))) {
 								st_usn = res.getString("student_usn");
+								java.util.Date date = new java.util.Date();
+								java.sql.Timestamp sqlTime = new java.sql.Timestamp(date.getTime());
+								dbo.insertIntoLogins(conn, sqlTime, st_usn);
 								StudentDashBoard frame = new StudentDashBoard();
 								frame.setVisible(true);
 								dispose();
@@ -96,6 +100,9 @@ public class LoginWindow extends JFrame {
 							if((username.getText().toString().equals(res.getString("faculty_name"))) && 
 									(password.getText().toString().equals(res.getString("faculty_password")))) {
 								facultyname = res.getString("faculty_name");
+								java.util.Date date = new java.util.Date();
+								java.sql.Timestamp sqlTime = new java.sql.Timestamp(date.getTime());
+								dbo.insertIntoLogins(conn, sqlTime, facultyname);
 								FacultyDashBoard frame = new FacultyDashBoard();
 								frame.setVisible(true);
 								dispose();

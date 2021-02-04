@@ -770,7 +770,11 @@ public class StudentDashBoard extends JFrame {
 		btnNewButton_2.setBounds(512, 38, 440, 129);
 		panel_4.add(btnNewButton_2);
 		
-		btnNewButton_3 = new JButton("Subject Registration");
+		btnNewButton_3 = new JButton("Ask Query");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_3.setBackground(new Color(169, 169, 169));
 		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnNewButton_3.setBounds(29, 219, 440, 129);
